@@ -13,7 +13,8 @@ export function getRecords(payload) {
 }
 
 export async function fetchRecords(resource, endpoint = `/api/${resource}/`) {
-  const response = await fetch(`${API_ORIGIN}${endpoint}`)
+  const url = endpoint.startsWith('http') ? endpoint : `${API_ORIGIN}${endpoint}`
+  const response = await fetch(url)
   if (!response.ok) throw new Error(`Unable to load ${resource}`)
   return getRecords(await response.json())
 }

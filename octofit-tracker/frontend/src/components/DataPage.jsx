@@ -17,7 +17,7 @@ export default function DataPage({ resource, endpoint, title, description, colum
       .then((data) => active && (setRecords(data), setState({ loading: false, error: '' })))
       .catch((error) => active && setState({ loading: false, error: error.message }))
     return () => { active = false }
-  }, [resource])
+  }, [resource, endpoint])
 
   return (
     <section className="data-page">
