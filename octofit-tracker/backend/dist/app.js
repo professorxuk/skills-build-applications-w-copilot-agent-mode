@@ -22,16 +22,5 @@ app.use('/api/teams', teams_1.default);
 app.use('/api/activities', activities_1.default);
 app.use('/api/leaderboard', leaderboard_1.default);
 app.use('/api/workouts', workouts_1.default);
-// Codespaces-aware API URL support
-app.get('/api/config', (req, res) => {
-    const codespaceName = process.env.CODESPACE_NAME;
-    const apiUrl = codespaceName
-        ? `https://${codespaceName}-8000.app.github.dev`
-        : 'http://localhost:8000';
-    res.json({
-        apiUrl,
-        environment: process.env.NODE_ENV || 'development',
-    });
-});
 exports.default = app;
 //# sourceMappingURL=app.js.map
