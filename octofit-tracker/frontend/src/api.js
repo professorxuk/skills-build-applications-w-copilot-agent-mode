@@ -1,8 +1,7 @@
 const codeSpaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
-
-export const API_BASE_URL = codeSpaceName
-  ? `https://${codeSpaceName}-8000.app.github.dev/api`
-  : '/api'
+const API_ORIGIN = codeSpaceName
+  ? `https://${codeSpaceName}-8000.app.github.dev`
+  : ''
 
 export function getRecords(payload) {
   if (Array.isArray(payload)) return payload
@@ -13,8 +12,8 @@ export function getRecords(payload) {
   return []
 }
 
-export async function fetchRecords(resource) {
-  const response = await fetch(`${API_BASE_URL}/${resource}/`)
+export async function fetchRecords(resource, endpoint = `/api/${resource}/`) {
+  const response = await fetch(`${API_ORIGIN}${endpoint}`)
   if (!response.ok) throw new Error(`Unable to load ${resource}`)
   return getRecords(await response.json())
 }

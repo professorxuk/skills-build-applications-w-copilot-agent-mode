@@ -7,13 +7,13 @@ function displayValue(value) {
   return String(value)
 }
 
-export default function DataPage({ resource, title, description, columns }) {
+export default function DataPage({ resource, endpoint, title, description, columns }) {
   const [records, setRecords] = useState([])
   const [state, setState] = useState({ loading: true, error: '' })
 
   useEffect(() => {
     let active = true
-    fetchRecords(resource)
+    fetchRecords(resource, endpoint)
       .then((data) => active && (setRecords(data), setState({ loading: false, error: '' })))
       .catch((error) => active && setState({ loading: false, error: error.message }))
     return () => { active = false }
